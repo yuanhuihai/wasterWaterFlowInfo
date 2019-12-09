@@ -63,13 +63,13 @@ namespace wasterWaterFlowInfo
         {
             timer1.Interval = 60000;//执行间隔时间,单位为毫秒;此时时间间隔为60秒   
 
-            float a2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 18) / 1440, //磷化稀水流量
-                b2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 14) / 1440,//磷化废液流量
-                c2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 66) / 1440,//脱脂稀水流量
-                d2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 46) / 1440,//脱脂浓水流量
-                e2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 38) / 1440,//电泳稀水流量
-                f2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 42) / 1440,//电泳浓水流量
-                g2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 62) / 1440;//喷漆废水流量
+            float a2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 18)/60, //磷化稀水流量
+                b2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 14) /60,//磷化废液流量
+                c2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 66) /60,//脱脂稀水流量
+                d2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 46) /60,//脱脂浓水流量
+                e2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 38) /60,//电泳稀水流量
+                f2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 42) /60,//电泳浓水流量
+                g2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 62) /60;//喷漆废水流量
 
             a1 = a1 + a2;
             b1 = b1 + b2;
