@@ -35,6 +35,8 @@ namespace wasterWaterFlowInfo
 
             this.Hide();
         }
+
+       
         //桌面右小角图标
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -52,10 +54,14 @@ namespace wasterWaterFlowInfo
             }
         }
 
+     
+
         private void Form1_Load(object sender, EventArgs e)
         {
             timer1.Start();
             timer2.Start();
+            textBox1.Text = "0";
+            textBox2.Text = "0";
         }
 
 
@@ -100,7 +106,7 @@ namespace wasterWaterFlowInfo
 
         }
 
-        //累积流量数据插入数据库
+        //累积流量数据插入数据库 每天的额23：58：00
         public void insert_data_to_database()
         {
             if (DateTime.Now.Hour == Convert.ToInt32(23) && DateTime.Now.Minute == Convert.ToInt32(58) && DateTime.Now.Second == Convert.ToInt32(00))
@@ -109,12 +115,45 @@ namespace wasterWaterFlowInfo
                 reset();
             }
         }
-
+        //每1s执行一次数据插入程序
         private void timer2_Tick(object sender, EventArgs e)
         {
             timer2.Interval = 1000;
             insert_data_to_database();
 
+           if(operatePlc.getPlcDbxVaules("10.228.142.173", 0, 0, 32, 1, 0))
+            {
+                textBox1.Text = "1";
+            }
+            else
+            {
+                textBox1.Text = "0";
+            }          
+            if (operatePlc.getPlcDbxVaules("10.228.142.173", 0, 0, 32, 1, 0))
+            {
+                textBox2.Text = "1";
+            }
+            else
+            {
+                textBox2.Text = "0";
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string riqi = DateTime.Now.ToString("yyyy-MM-dd");
+            string shijian = DateTime.Now.ToLongTimeString().ToString();
+            string status = "磷化压滤机可以开板了";
+            string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" +textBox1.Text+ "','"+status+"')";
+            operateDatabase.OrcGetCom(str_sqlstr);
+        }
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            string riqi = DateTime.Now.ToString("yyyy-MM-dd");
+            string shijian = DateTime.Now.ToLongTimeString().ToString();
+            string status = "综合压滤机可以开板了";
+            string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" +textBox2.Text + "','" + status + "') ";
+            operateDatabase.OrcGetCom(str_sqlstr);
         }
     }
 }

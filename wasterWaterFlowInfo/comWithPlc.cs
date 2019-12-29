@@ -48,6 +48,13 @@ namespace comWithPlc
             Client.Disconnect();
 
         }
+        public bool getPlcDbxVaules(string plcIp, int Rack, int Slot, int DbNum, int dbx,int dbxx)
+        {
+            byte[] Buffer = new byte[2];
+            Client.ConnectTo(plcIp, Rack, Slot);
+            Client.DBRead(DbNum,dbx,2, Buffer);//读取DbwNum所对应的字的值        
+            return S7.GetBitAt(Buffer, 0,dbxx);          
+        }
 
     }
 }
