@@ -37,22 +37,7 @@ namespace wasterWaterFlowInfo
         }
 
        
-        //桌面右小角图标
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                this.WindowState = FormWindowState.Minimized;
-
-                this.Hide();
-            }
-            else if (this.WindowState == FormWindowState.Minimized)
-            {
-                this.Show();
-                this.WindowState = FormWindowState.Normal;
-                this.Activate();
-            }
-        }
+      
 
      
 
@@ -64,6 +49,50 @@ namespace wasterWaterFlowInfo
             textBox2.Text = "0";
         }
 
+        private void exitMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("你确定要退出程序吗？", "确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                notifyIcon1.Visible = false;
+                this.Close();
+                this.Dispose();
+                Application.Exit();
+            }
+
+        }
+
+        private void hideMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void showMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            this.Activate();
+
+        }
+
+        //桌面右小角图标
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)//判断鼠标的按键
+            {
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    this.WindowState = FormWindowState.Minimized;
+
+                    this.Hide();
+                }
+                else if (this.WindowState == FormWindowState.Minimized)
+                {
+                    this.Show();
+                    this.WindowState = FormWindowState.Normal;
+                    this.Activate();
+                }
+            }
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
