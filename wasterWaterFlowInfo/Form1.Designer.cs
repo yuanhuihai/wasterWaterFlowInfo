@@ -59,6 +59,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -246,7 +248,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(380, 46);
+            this.label8.Location = new System.Drawing.Point(302, 81);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(67, 13);
             this.label8.TabIndex = 23;
@@ -255,7 +257,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(380, 76);
+            this.label9.Location = new System.Drawing.Point(302, 111);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(67, 13);
             this.label9.TabIndex = 24;
@@ -263,7 +265,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(499, 42);
+            this.textBox1.Location = new System.Drawing.Point(382, 78);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(27, 20);
             this.textBox1.TabIndex = 26;
@@ -271,7 +273,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(500, 73);
+            this.textBox2.Location = new System.Drawing.Point(382, 109);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(27, 20);
             this.textBox2.TabIndex = 27;
@@ -288,7 +290,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(453, 42);
+            this.textBox3.Location = new System.Drawing.Point(446, 78);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(27, 20);
             this.textBox3.TabIndex = 29;
@@ -296,17 +298,37 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(453, 76);
+            this.textBox4.Location = new System.Drawing.Point(446, 112);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(27, 20);
             this.textBox4.TabIndex = 30;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(373, 45);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(55, 13);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "翻板打开";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(434, 45);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.TabIndex = 32;
+            this.label12.Text = "进料启动";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 450);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label10);
@@ -371,6 +393,8 @@
         private System.Windows.Forms.ToolStripMenuItem showMenuItem;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }
 

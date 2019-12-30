@@ -52,7 +52,8 @@ namespace comWithPlc
         {
             byte[] Buffer = new byte[2];
             Client.ConnectTo(plcIp, Rack, Slot);
-            Client.DBRead(DbNum,dbx,2, Buffer);//读取DbwNum所对应的字的值        
+            Client.DBRead(DbNum,dbx,2, Buffer);//读取DbwNum所对应的字的值      
+            Client.Disconnect();
             return S7.GetBitAt(Buffer, 0,dbxx);          
         }
 

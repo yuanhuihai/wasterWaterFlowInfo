@@ -152,6 +152,7 @@ namespace wasterWaterFlowInfo
             timer2.Interval = 1000;
             insert_data_to_database();
 
+            
            if(operatePlc.getPlcDbxVaules("10.228.142.172", 0, 0, 32, 0, 3))
             {
                 textBox1.Text = "1";
