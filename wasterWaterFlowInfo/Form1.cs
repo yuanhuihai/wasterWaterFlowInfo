@@ -21,26 +21,8 @@ namespace wasterWaterFlowInfo
         Basic_DataBase_Operate operateDatabase = new Basic_DataBase_Operate();
         getPlcValues operatePlc = new getPlcValues();
 
-        float a1, b1, c1, d1, e1, f1, g1;
 
-        public void reset()
-        {
-            a1 = 0; b1 = 0; c1 = 0; d1 = 0; e1 = 0; f1 = 0; g1 = 0;
-        }
-
-        //窗体关闭时执行，窗体后台运行
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            e.Cancel = true;
-
-            this.Hide();
-        }
-
-       
-      
-
-     
-
+        //窗体加载时，执行程序
         private void Form1_Load(object sender, EventArgs e)
         {
             timer1.Start();
@@ -49,6 +31,17 @@ namespace wasterWaterFlowInfo
             textBox2.Text = "0";
         }
 
+
+        //窗体关闭时执行，窗体后台运行
+        //需要在form1属性中修改showintaskbar为false
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+
+            this.Hide();
+        }
+
+        //托盘程序，窗体退出
         private void exitMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("你确定要退出程序吗？", "确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
@@ -61,11 +54,13 @@ namespace wasterWaterFlowInfo
 
         }
 
+        //托盘程序，窗体隐藏
         private void hideMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
 
+        //托盘程序，窗体弹出
         private void showMenuItem_Click(object sender, EventArgs e)
         {
             this.Show();
@@ -74,7 +69,7 @@ namespace wasterWaterFlowInfo
 
         }
 
-        //桌面右小角图标
+        //托盘程序，图标功能
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)//判断鼠标的按键
@@ -94,59 +89,49 @@ namespace wasterWaterFlowInfo
             }
         }
 
-    
 
+        //每1s读取流量信息
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Interval = 60000;//执行间隔时间,单位为毫秒;此时时间间隔为60秒   
+            timer1.Interval = 1000;//执行间隔时间,单位为毫秒;此时时间间隔为60秒   
+                
+       
+            label15.Text = Convert.ToString(operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 200, 78));//磷化稀水流量
+            label16.Text = Convert.ToString(operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 200, 60));//磷化废液流量
+            label17.Text = Convert.ToString(operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 200, 294));//脱脂稀水流量
+            label18.Text = Convert.ToString(operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 200, 204));//脱脂浓水流量
+            label19.Text = Convert.ToString(operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 200, 168));//电泳稀水流量
+            label20.Text = Convert.ToString(operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 200, 186));//电泳浓水流量
+            label21.Text = Convert.ToString(operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 200, 276));//喷漆废水流量
 
-            float a2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 18)/60, //磷化稀水流量
-                b2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 14) /60,//磷化废液流量
-                c2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 66) /60,//脱脂稀水流量
-                d2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 46) /60,//脱脂浓水流量
-                e2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 38) /60,//电泳稀水流量
-                f2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 42) /60,//电泳浓水流量
-                g2 = operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 1, 62) /60;//喷漆废水流量
-
-            a1 = a1 + a2;
-            b1 = b1 + b2;
-            c1 = c1 + c2;
-            d1 = d1 + d2;
-            e1 = e1 + e2;
-            f1 = f1 + f2;
-            g1 = g1 + g2;
-         
            
-
-            label15.Text = Convert.ToString(a1);
-            label16.Text = Convert.ToString(b1);
-            label17.Text = Convert.ToString(c1);
-            label18.Text = Convert.ToString(d1);
-            label19.Text = Convert.ToString(e1);
-            label20.Text = Convert.ToString(f1);
-            label21.Text = Convert.ToString(g1);
         }
+       
+   
 
-        //获取累积流量
-        public void waterFlowInfoToDatabasee()
-        {
-            string riqi = DateTime.Now.ToString("yyyy-MM-dd");
-            string shijian = DateTime.Now.ToLongTimeString().ToString();
-            string str_sqlstr = "insert into WASTEWATERFLOWINFO values('" + riqi + "','" + shijian + "','" + a1 + "','" + b1 + "','" + c1 + "','" + d1 + "','" + e1 + "','" + f1 + "','" + g1 + "') ";
-            operateDatabase.OrcGetCom(str_sqlstr);
-
-        }
-
-        //累积流量数据插入数据库 每天的额23：58：00
+        //累积流量数据插入数据库 每天的额23：58：00 同时将每天的累积流量清0
         public void insert_data_to_database()
         {
             if (DateTime.Now.Hour == Convert.ToInt32(23) && DateTime.Now.Minute == Convert.ToInt32(58) && DateTime.Now.Second == Convert.ToInt32(00))
             {
-              waterFlowInfoToDatabasee();
-                reset();
+                string riqi = DateTime.Now.ToString("yyyy-MM-dd");
+                string shijian = DateTime.Now.ToLongTimeString().ToString();
+                string str_sqlstr = "insert into WASTEWATERFLOWINFO values('" + riqi + "','" + shijian + "','" + label15.Text + "','" + label16.Text + "','" + label17.Text + "','" + label18.Text + "','" + label19.Text + "','" + label20.Text + "','" + label21.Text + "') ";
+                operateDatabase.OrcGetCom(str_sqlstr);
+
+                operatePlc.writePlcDbdValues("10.228.142.106", 0, 3, 200, 78, 0);
+                operatePlc.writePlcDbdValues("10.228.142.106", 0, 3, 200, 60, 0);
+                operatePlc.writePlcDbdValues("10.228.142.106", 0, 3, 200, 294, 0);
+                operatePlc.writePlcDbdValues("10.228.142.106", 0, 3, 200, 204, 0);
+                operatePlc.writePlcDbdValues("10.228.142.106", 0, 3, 200, 168, 0);
+                operatePlc.writePlcDbdValues("10.228.142.106", 0, 3, 200, 186, 0);
+                operatePlc.writePlcDbdValues("10.228.142.106", 0, 3, 200, 276, 0);
+
             }
         }
-        //每1s执行一次数据插入程序
+
+
+        //记录压滤机工作状态
         private void timer2_Tick(object sender, EventArgs e)
         {
             timer2.Interval = 1000;
@@ -186,7 +171,6 @@ namespace wasterWaterFlowInfo
                 textBox4.Text = "0";
             }
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             string riqi = DateTime.Now.ToString("yyyy-MM-dd");
