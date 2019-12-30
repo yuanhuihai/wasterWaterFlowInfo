@@ -93,7 +93,7 @@ namespace wasterWaterFlowInfo
         //每1s读取流量信息
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Interval = 1000;//执行间隔时间,单位为毫秒;此时时间间隔为60秒   
+            timer1.Interval = 60000;//执行间隔时间,单位为毫秒;此时时间间隔为60秒   
                 
        
             label15.Text = Convert.ToString(operatePlc.readPlcDbdValues("10.228.142.106", 0, 3, 200, 78));//磷化稀水流量
