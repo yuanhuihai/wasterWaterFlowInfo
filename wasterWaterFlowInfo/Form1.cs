@@ -175,33 +175,50 @@ namespace wasterWaterFlowInfo
         {
             string riqi = DateTime.Now.ToString("yyyy-MM-dd");
             string shijian = DateTime.Now.ToLongTimeString().ToString();
-            string status = "磷化压滤机可以开板了";
-            string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" +textBox1.Text+ "','"+status+"')";
-            operateDatabase.OrcGetCom(str_sqlstr);
+            if (textBox1.Text == 1.ToString())
+            {
+                string status = "磷化压滤机可以开板了";
+                string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" + textBox1.Text + "','" + status + "','')";
+                operateDatabase.OrcGetCom(str_sqlstr);
+            }
+       
         }
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             string riqi = DateTime.Now.ToString("yyyy-MM-dd");
             string shijian = DateTime.Now.ToLongTimeString().ToString();
-            string status = "磷化压滤机可以开始工作了";
-            string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" + textBox3.Text + "','" + status + "')";
-            operateDatabase.OrcGetCom(str_sqlstr);
+            if (textBox3.Text == 1.ToString())
+            {
+                string status = "磷化压滤机可以开始工作了";
+                string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" + textBox3.Text + "','" + status + "','')";
+                operateDatabase.OrcGetCom(str_sqlstr);
+            }
+         
         }
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             string riqi = DateTime.Now.ToString("yyyy-MM-dd");
             string shijian = DateTime.Now.ToLongTimeString().ToString();
-            string status = "综合压滤机可以开板了";
-            string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" +textBox2.Text + "','" + status + "') ";
-            operateDatabase.OrcGetCom(str_sqlstr);
+
+            if (textBox2.Text == 1.ToString())
+            {
+                string status = "综合压滤机可以开板了";
+                string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" + textBox2.Text + "','" + status + "','') ";
+                operateDatabase.OrcGetCom(str_sqlstr);
+            }
+ 
         }
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             string riqi = DateTime.Now.ToString("yyyy-MM-dd");
             string shijian = DateTime.Now.ToLongTimeString().ToString();
-            string status = "综合压滤机可以开始工作了";
-            string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" + textBox4.Text + "','" + status + "') ";
-            operateDatabase.OrcGetCom(str_sqlstr);
+            if (textBox4.Text == 1.ToString())
+            {
+                string status = "综合压滤机可以开始工作了";
+                string str_sqlstr = "insert into WASTEWATERFILTERINFO values('" + riqi + "','" + shijian + "','" + textBox4.Text + "','" + status + "','') ";
+                operateDatabase.OrcGetCom(str_sqlstr);
+            }
+       
         }
     }
 }
